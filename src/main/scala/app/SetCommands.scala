@@ -7,7 +7,7 @@ import cats.syntax.functor._
 import org.typelevel.log4cats.Logger
 import org.typelevel.log4cats.slf4j.Slf4jLogger
 
-object SetCommands extends App {
+object SetCommands extends App.SingleNode {
 
   protected def program[F[_] : Async]: (Logger[F] => Env[F]) => F[Unit] =
     Slf4jLogger.create.map(_) >>= { env =>

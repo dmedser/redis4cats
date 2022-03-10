@@ -3,9 +3,9 @@ import sbt._
 object Dependencies {
   object Versions {
     val cats       = "2.7.0"
-    val catsEffect = "3.3.5"
+    val catsEffect = "3.3.7"
     val circe      = "0.14.1"
-    val logback    = "1.2.10"
+    val logback    = "1.2.11"
     val log4cats   = "2.2.0"
     val redis4cats = "1.1.1"
   }
@@ -18,7 +18,7 @@ object Dependencies {
 
   val logback = Seq("logback-classic").map("ch.qos.logback" % _ % Versions.logback)
 
-  val log4catsSlf4j = Seq("log4cats-slf4j").map("org.typelevel" %% _ % Versions.log4cats)
+  val log4cats = Seq("log4cats-slf4j").map("org.typelevel" %% _ % Versions.log4cats)
 
   val redis4cats =
     Seq(

@@ -12,7 +12,7 @@ import io.lettuce.core.ZAddArgs
 import org.typelevel.log4cats.Logger
 import org.typelevel.log4cats.slf4j.Slf4jLogger
 
-object SortedSetCommands extends App {
+object SortedSetCommands extends App.SingleNode {
 
   private sealed trait ZAddArgs0 {
     override def toString: String =

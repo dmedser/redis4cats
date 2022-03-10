@@ -18,7 +18,7 @@ import org.typelevel.log4cats.slf4j.Slf4jLogger
 import scala.concurrent.TimeoutException
 import scala.concurrent.duration._
 
-object StringCommands extends App {
+object StringCommands extends App.SingleNode {
 
   protected def program[F[_] : Async]: (Logger[F] => Env[F]) => F[Unit] =
     Slf4jLogger.create.map(_) >>= { env =>

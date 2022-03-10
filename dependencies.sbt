@@ -7,7 +7,7 @@ libraryDependencies ++= {
       catsEffect ++
       circe ++
       logback ++
-      log4catsSlf4j ++
+      log4cats ++
       redis4cats
 
   val test = Seq.empty[ModuleID]

@@ -9,7 +9,7 @@ import io.lettuce.core.GeoArgs
 import org.typelevel.log4cats.Logger
 import org.typelevel.log4cats.slf4j.Slf4jLogger
 
-object GeoCommands extends App {
+object GeoCommands extends App.SingleNode {
 
   protected def program[F[_] : Async]: (Logger[F] => Env[F]) => F[Unit] =
     Slf4jLogger.create.map(_) >>= { env =>
