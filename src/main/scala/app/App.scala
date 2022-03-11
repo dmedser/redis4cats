@@ -73,7 +73,7 @@ object App {
         //        codec: RedisCodec[K, V],
         //        nodeId: NodeId
         //    )(readFrom: Option[JReadFrom] = None): Resource[F, RedisCommands[F, K, V]]
-        cmd <- Redis[F].clusterUtf8(uris = (7000 to 7005).map(port => redisUri("127.0.0.1", port)): _*)()
+        cmd <- Redis[F].clusterUtf8((1 to 6).map(x => redisUri(s"10.0.0.1$x", 7000 + x)): _*)()
       } yield (logger: Logger[F]) =>
         new Env[F] {
           val redis: RedisCommands[F, String, String] = cmd

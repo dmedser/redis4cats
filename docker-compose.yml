@@ -1,64 +1,86 @@
 version: "3.9"
 
+networks:
+
+  redisnet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.0.0.0/16
+
 services:
 
   redis-cluster:
     image: "redis:alpine"
-    network_mode: "host"
     depends_on:
-      - redis-node-0
       - redis-node-1
       - redis-node-2
       - redis-node-3
       - redis-node-4
       - redis-node-5
+      - redis-node-6
     command:
-      redis-cli --cluster create 127.0.0.1:7000 127.0.0.1:7001 127.0.0.1:7002 127.0.0.1:7003 127.0.0.1:7004 127.0.0.1:7005 --cluster-replicas 1 --cluster-yes
-
-  redis-node-0:
-    image: "redis:alpine"
-    network_mode: "host"
-    volumes:
-      - ./redis-cluster-test/7000/redis.conf:/usr/local/etc/redis/redis.conf
-    command:
-      redis-server /usr/local/etc/redis/redis.conf
+      redis-cli --cluster create 10.0.0.11:7001 10.0.0.12:7002 10.0.0.13:7003 10.0.0.14:7004 10.0.0.15:7005 10.0.0.16:7006 --cluster-replicas 1 --cluster-yes
+    networks:
+      redisnet:
+        ipv4_address: 10.0.0.10
 
   redis-node-1:
     image: "redis:alpine"
-    network_mode: "host"
     volumes:
       - ./redis-cluster-test/7001/redis.conf:/usr/local/etc/redis/redis.conf
     command:
       redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      redisnet:
+        ipv4_address: 10.0.0.11
 
   redis-node-2:
     image: "redis:alpine"
-    network_mode: "host"
     volumes:
       - ./redis-cluster-test/7002/redis.conf:/usr/local/etc/redis/redis.conf
     command:
       redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      redisnet:
+        ipv4_address: 10.0.0.12
 
   redis-node-3:
     image: "redis:alpine"
-    network_mode: "host"
     volumes:
       - ./redis-cluster-test/7003/redis.conf:/usr/local/etc/redis/redis.conf
     command:
       redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      redisnet:
+        ipv4_address: 10.0.0.13
 
   redis-node-4:
     image: "redis:alpine"
-    network_mode: "host"
     volumes:
       - ./redis-cluster-test/7004/redis.conf:/usr/local/etc/redis/redis.conf
     command:
       redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      redisnet:
+        ipv4_address: 10.0.0.14
 
   redis-node-5:
     image: "redis:alpine"
-    network_mode: "host"
     volumes:
       - ./redis-cluster-test/7005/redis.conf:/usr/local/etc/redis/redis.conf
     command:
       redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      redisnet:
+        ipv4_address: 10.0.0.15
+
+  redis-node-6:
+    image: "redis:alpine"
+    volumes:
+      - ./redis-cluster-test/7006/redis.conf:/usr/local/etc/redis/redis.conf
+    command:
+      redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      redisnet:
+        ipv4_address: 10.0.0.16
